@@ -3,6 +3,7 @@ version: '3.9'
 services:
   app:
     image: springbatchdemo:latest
+    container_name: batch_app
     build:
       context: .
       dockerfile: Dockerfile
