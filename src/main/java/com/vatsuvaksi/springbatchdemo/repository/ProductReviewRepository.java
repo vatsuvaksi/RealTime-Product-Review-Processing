@@ -24,6 +24,6 @@ public interface ProductReviewRepository extends JpaRepository<ProductReview, Lo
      *
      * @return the total count of ProductReview records created yesterday
      */
-    @Query("SELECT COUNT(pr) FROM ProductReview pr WHERE pr.createdAt >= :yesterdayStart AND pr.createdAt < :yesterdayEnd")
+    @Query("SELECT COUNT(pr) FROM ProductReview pr ")
     long countAllRecords(LocalDateTime yesterdayStart, LocalDateTime yesterdayEnd);
 }

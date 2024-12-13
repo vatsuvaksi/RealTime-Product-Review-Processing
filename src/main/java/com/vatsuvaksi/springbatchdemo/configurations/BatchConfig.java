@@ -12,11 +12,14 @@ import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import java.net.http.WebSocket;
 
 @Configuration
 @EnableBatchProcessing
@@ -26,6 +29,7 @@ public class BatchConfig {
     private JobRepository jobRepository;
 
     @Autowired
+    @Qualifier("transactionManager")
     private PlatformTransactionManager transactionManager;
 
     @Autowired
@@ -43,18 +47,25 @@ public class BatchConfig {
     @Autowired
     private Partitioner partitioner;
 
+    @Autowired
+    private JobCompletionNotificationListener listener;
+
     private final int chunkSize = 5000;
 
+    @Bean
     public Job job(){
         return new JobBuilder("batchJobdemo" , jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .start(leaderStep())
+                .listener(listener)
                 .build();
     }
 
-    private Step leaderStep() {
+    @Bean
+    public Step leaderStep() {
         return new StepBuilder("leaderStep" , jobRepository)
                 .partitioner("workerStep" , partitioner)
+                .step(workerStep())
                 .taskExecutor(taskExecutor())
                 .build();
     }

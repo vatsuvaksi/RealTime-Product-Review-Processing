@@ -18,23 +18,5 @@ public class HelperBeans {
         return WebClient.builder().build();
     }
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        HikariConfig config = new HikariConfig();
-
-        // Set PostgreSQL specific properties
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/batchdb");
-        config.setUsername("batchuser");
-        config.setPassword("batchpassword");
-        config.setDriverClassName("org.postgresql.Driver");
-        config.setMaximumPoolSize(10);
-        config.setConnectionTimeout(30000);
-        config.setIdleTimeout(600000);
-
-
-        return new DataSourceTransactionManager(
-                new HikariDataSource(config)
-        );
-    }
 
 }

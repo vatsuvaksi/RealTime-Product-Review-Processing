@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vatsuvaksi.springbatchdemo.entities.ProductReview;
 import com.vatsuvaksi.springbatchdemo.redis.RedisService;
 import jakarta.annotation.PostConstruct;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Component("writer")
+@StepScope
 public class Writer implements ItemWriter<ProductReview> {
 
     private ThreadPoolExecutor executor;

@@ -4,6 +4,7 @@ import com.vatsuvaksi.springbatchdemo.entities.ProductReview;
 import com.vatsuvaksi.springbatchdemo.repository.ProductReviewRepository;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.BeforeStep;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.time.LocalTime;
 import java.util.Iterator;
 
 @Component("reader")
+@StepScope
 public class Reader implements ItemReader<ProductReview> {
 
     @Autowired

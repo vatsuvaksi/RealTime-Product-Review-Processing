@@ -31,6 +31,7 @@ public class ChunkPartitioner implements Partitioner {
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {
         long totalRecords = repository.countAllRecords(yesterdayStart,yesterdayEnd);
+        System.out.println("Total Records Satisfying the condition " + totalRecords);
         int numberOfPartitions = (int) Math.ceil((double) totalRecords / chunkSize);
         Map<String, ExecutionContext> partitions = new HashMap<>();
 
@@ -39,6 +40,7 @@ public class ChunkPartitioner implements Partitioner {
             context.putInt("pageNumber", i);
             context.putInt("pageSize", chunkSize);
             partitions.put("partition" + i, context);
+            System.out.println("Creating partition -" + i + " with pageNumber + " + i + " chunkSize " + chunkSize);
         }
 
         return partitions;
