@@ -1,17 +1,12 @@
 package com.vatsuvaksi.springbatchdemo.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product_review")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class ProductReview {
 
@@ -37,4 +32,70 @@ public class ProductReview {
 
     @Column(name = "is_processed", nullable = false)
     private Boolean isProcessed = false;
+
+    public ProductReview(Long reviewId, Integer productId, Integer userId, Short rating, String reviewText, LocalDateTime createdAt, Boolean isProcessed) {
+        this.reviewId = reviewId;
+        this.productId = productId;
+        this.userId = userId;
+        this.rating = rating;
+        this.reviewText = reviewText;
+        this.createdAt = createdAt;
+        this.isProcessed = isProcessed;
+    }
+
+    public Long getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Short getRating() {
+        return rating;
+    }
+
+    public void setRating(Short rating) {
+        this.rating = rating;
+    }
+
+    public String getReviewText() {
+        return reviewText;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Boolean getProcessed() {
+        return isProcessed;
+    }
+
+    public void setProcessed(Boolean processed) {
+        isProcessed = processed;
+    }
 }

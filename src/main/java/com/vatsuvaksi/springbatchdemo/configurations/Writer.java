@@ -25,6 +25,7 @@ public class Writer implements ItemWriter<ProductReview> {
     private final WebClient webClient;
     private final RedisService redisServer;
 
+
     @Autowired
     public Writer(WebClient.Builder webClientBuilder, RedisService redisServer) {
         this.webClient = webClientBuilder.baseUrl("http://localhost:3031").build();

@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableBatchProcessing
@@ -23,6 +24,9 @@ public class BatchConfig {
 
     @Autowired
     private JobRepository jobRepository;
+
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     @Autowired
     @StepScope
@@ -58,7 +62,7 @@ public class BatchConfig {
     @Bean
     public Step workerStep() {
         return new StepBuilder("workerStep", jobRepository)
-                .<ProductReview, ProductReview>chunk(chunkSize)
+                .<ProductReview, ProductReview>chunk(chunkSize, transactionManager)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
