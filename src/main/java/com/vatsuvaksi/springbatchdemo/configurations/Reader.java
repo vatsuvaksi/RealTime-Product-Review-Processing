@@ -19,19 +19,20 @@ import java.util.Iterator;
 @Component("reader")
 public class Reader implements ItemReader<ProductReview> {
 
-    private final ProductReviewRepository repository;
+    @Autowired
+    private ProductReviewRepository repository;
     private Iterator<ProductReview> currentBatch;
     private int pageNumber;
     private int pageSize;
     private final LocalDateTime yesterdayStart;
     private final LocalDateTime yesterdayEnd;
 
-    @Autowired
-    public Reader(ProductReviewRepository repository) {
+
+    public Reader() {
         LocalDate yesterday = LocalDate.now().minusDays(1);
         this.yesterdayStart = yesterday.atStartOfDay();
         this.yesterdayEnd = yesterday.atTime(LocalTime.MAX);
-        this.repository = repository;
+
     }
 
     @BeforeStep
