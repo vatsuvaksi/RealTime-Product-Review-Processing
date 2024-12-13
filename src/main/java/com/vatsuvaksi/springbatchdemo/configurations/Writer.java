@@ -90,7 +90,8 @@ public class Writer implements ItemWriter<ProductReview> {
                         .queryParam("id", review.getProductId())
                         .build())
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(String.class)
+                .doOnCancel(() -> System.out.println("Request was canceled"));
     }
 
     private void storeInRedis(ProductReview review, String apiResponse)  {

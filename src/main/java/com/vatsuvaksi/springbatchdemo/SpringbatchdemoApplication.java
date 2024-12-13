@@ -14,8 +14,10 @@ public class SpringbatchdemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbatchdemoApplication.class, args);
 	}
+
 	@Autowired
 	private JobRepository jobRepository;
+
 	@Bean
 	public JobLauncher jobLauncher() throws Exception {
 		TaskExecutorJobLauncher jobLauncher = new TaskExecutorJobLauncher();

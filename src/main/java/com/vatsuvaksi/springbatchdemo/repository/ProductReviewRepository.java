@@ -16,7 +16,7 @@ public interface ProductReviewRepository extends JpaRepository<ProductReview, Lo
      * @param pageable the pagination information
      * @return a page of ProductReview entities created yesterday
      */
-    @Query("SELECT pr FROM ProductReview pr WHERE pr.createdAt >= :yesterdayStart AND pr.createdAt < :yesterdayEnd")
+    @Query("SELECT pr FROM ProductReview pr ")
     Page<ProductReview> findAllWithPagination(LocalDateTime yesterdayStart, LocalDateTime yesterdayEnd, Pageable pageable);
 
     /**

@@ -19,8 +19,6 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.net.http.WebSocket;
-
 @Configuration
 @EnableBatchProcessing
 public class BatchConfig {
@@ -67,6 +65,7 @@ public class BatchConfig {
                 .partitioner("workerStep" , partitioner)
                 .step(workerStep())
                 .taskExecutor(taskExecutor())
+                .allowStartIfComplete(true)
                 .build();
     }
 

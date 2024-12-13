@@ -43,6 +43,10 @@ public class ProductReview {
         this.isProcessed = isProcessed;
     }
 
+    public ProductReview() {
+
+    }
+
     public Long getReviewId() {
         return reviewId;
     }
