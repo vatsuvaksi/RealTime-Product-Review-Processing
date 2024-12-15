@@ -36,6 +36,7 @@ public class RedisService {
                 objectMapper.writeValueAsString(productReview)
         );
 
+        System.out.println("Redis_call_counter");
         jedis.rpush(id, values.toArray(new String[0]));
     }
 

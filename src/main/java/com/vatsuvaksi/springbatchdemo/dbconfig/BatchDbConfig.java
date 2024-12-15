@@ -31,7 +31,7 @@ public class BatchDbConfig {
 
         HikariConfig config = new HikariConfig();
 
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/batchdb");
+        config.setJdbcUrl("jdbc:postgresql://psql:5432/batchdb");
         config.setUsername("batchuser");
         config.setPassword("batchpassword");
         config.setDriverClassName("org.postgresql.Driver");
