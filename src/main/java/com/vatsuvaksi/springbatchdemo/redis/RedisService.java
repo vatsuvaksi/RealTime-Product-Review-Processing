@@ -2,6 +2,7 @@ package com.vatsuvaksi.springbatchdemo.redis;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.vatsuvaksi.springbatchdemo.entities.ProductReview;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
@@ -31,6 +32,8 @@ public class RedisService {
      * @throws JsonProcessingException if serialization fails.
      */
     public void saveToRedis(String id, String apiResponse, ProductReview productReview) throws JsonProcessingException {
+
+        objectMapper.registerModule(new JavaTimeModule());
         List<String> values = Arrays.asList(
                 apiResponse,
                 objectMapper.writeValueAsString(productReview)
