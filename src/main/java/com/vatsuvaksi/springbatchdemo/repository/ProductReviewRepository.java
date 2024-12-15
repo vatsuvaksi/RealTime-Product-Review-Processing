@@ -10,20 +10,9 @@ import java.time.LocalDateTime;
 
 public interface ProductReviewRepository extends JpaRepository<ProductReview, Long> {
 
-    /**
-     * Fetches all ProductReview entities created yesterday with pagination support.
-     *
-     * @param pageable the pagination information
-     * @return a page of ProductReview entities created yesterday
-     */
     @Query("SELECT pr FROM ProductReview pr ")
     Page<ProductReview> findAllWithPagination(LocalDateTime yesterdayStart, LocalDateTime yesterdayEnd, Pageable pageable);
 
-    /**
-     * Retrieves the total count of ProductReview records created yesterday.
-     *
-     * @return the total count of ProductReview records created yesterday
-     */
     @Query("SELECT COUNT(pr) FROM ProductReview pr ")
     long countAllRecords(LocalDateTime yesterdayStart, LocalDateTime yesterdayEnd);
 }
